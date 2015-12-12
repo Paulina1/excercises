@@ -5,74 +5,38 @@ using namespace std;
 int main ()
 {
     string napis;
-    ifstream wczyt ("napisy.txt");
-    int l=0,a,c,b,d,e,f,g,h,j,k,m,n,o,u,p,r;
-    while (!wczyt.eof())
-    {
+    int parzyste = 0, zera = 0, jedynki = 0, rowne = 0;
+    int l_zer, l_jedynek;
+    ifstream wczyt("napisy.txt");
+
+    int liczba_znakow[14]; //od 2 do 16, przesuniecie o 2
+    for (int i = 0; i < 14; i++) liczba_znakow[i] = 0;
+
+    while (!wczyt.eof())    {
         wczyt >> napis ;
-        if ( napis.size() % 2 == 0){
-            l++;}
 
-        a=0;
-        b=0;
-        c=0;
+        if ( napis.size() % 2 == 0) parzyste++;
         // koniec podpunktu a)
-        for ( int i = 0 ; i < napis.size() ; i++ ){
-            if( napis[i] == '0')
-                a++;
-            else
-                b++;
-
+        l_zer = l_jedynek = 0;
+        for ( int i = 0 ; i < napis.size() ; i++ )  {
+            if (napis[i] == '0') l_zer++;
+            else l_jedynek++;
         }
 
-        if( a == b)
-                c++;
-        // koniec podpunktu b)
-        d=0;
-        e=0;
-        f=0;
-        g=0;
-        for (int i = 0 ; i < napis.size() ; i++ ){
-            if ( napis[i] == '0')
-                d++;
-            if ( napis[i] == '1' )
-                f++;
-        }
-        if ( d == napis.size() ){
-            e++;
-        }
-
-        if ( f == napis.size() ){
-            g++;
-        }
-    //koniec podpunktu c)
-        h=0;
-        j=0;
-        k=0;
-        m=0;
-        n=0;
-        o=0;
-        u=0;
-        p=0;
-        r=0;
-        if ( napis.size() == 2 )
-            h++;
-        if ( napis.size() == 3 )
-            j++;
-        if ( napis.size() == 4 )
-            k++;
-        if ( napis.size() == 5 )
-            m++;
-        if ( napis.size() == 6 )
+        if (l_zer == l_jedynek) rowne++;
+        else if (l_zer == napis.size()) zera++;
+        else if (l_jedynek == napis.size()) jedynki++;
+        //koniec podpunktu b) i c)
+        liczba_znakow[napis.size() - 2]++;
+        //koniec podpunktu d)
     }
-    cout << "wyrazy o parzytej dlugoci " << l << endl;
-    cout << "napisy, ktore zawieraja taka sama ilosc zer i jedynek " << c << endl;
-    cout << "wyrazow skladajacych sie z samych zer jest " << e << endl;
-    cout << "wyrazow skladajacych sie z samych jedynek jest " << g << endl;
-    cout << "napisow dwu-znakowych jest " << h << endl;
-    cout << "napisow trzy-znakowych jest " << j << endl;
-    cout << "napisow cztero-znakowych jest " << k << endl;
-    cout << "napisow piecio-znakowych jest " << m << endl;
+    cout << "wyrazy o parzytej dlugoci " << parzyste << endl;
+    cout << "napisy, ktore zawieraja taka sama ilosc zer i jedynek " << rowne << endl;
+    cout << "wyrazow skladajacych sie z samych zer jest " << zera << endl;
+    cout << "wyrazow skladajacych sie z samych jedynek jest " << jedynki << endl;
+    for (int i = 0; i < 14; i++)    {
+        cout << "napisow " << i <<"-znakowych jest " << liczba_znakow[i] << endl;
+    }
 
-
+    return 0;
 }
