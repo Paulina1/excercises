@@ -35,7 +35,7 @@ int main ()
     cout << "wyrazow skladajacych sie z samych zer jest " << zera << endl;
     cout << "wyrazow skladajacych sie z samych jedynek jest " << jedynki << endl;
     for (int i = 0; i < 14; i++)    {
-        cout << "napisow " << i <<"-znakowych jest " << liczba_znakow[i] << endl;
+        cout << "napisow " << i + 2 <<"-znakowych jest " << liczba_znakow[i] << endl;
     }
 
     return 0;
